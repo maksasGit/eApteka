@@ -1,4 +1,4 @@
-package Entity;
+package com.example.eapteka;
 
 
 import jakarta.persistence.*;
@@ -12,15 +12,15 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "products")
-public class Product {
+@Table(name = "users")
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private Float price;
-    //private Image image;
-    private Integer amount;
+    private String username;
+    private String password;
+    private String email;
+
 }

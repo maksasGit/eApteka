@@ -1,8 +1,8 @@
-package Controllers;
+package com.example.eapteka;
 
 
-import Entity.User;
-import Services.UserService;
+import com.example.eapteka.User;
+import com.example.eapteka.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,10 +23,14 @@ public class UserContoller {
     }
 
 
-    @PostMapping("/user")
-    public void save(@RequestBody User user){
-        userService.save(user);
+    @GetMapping("/health")
+    public String checkHealth() {
+        return "Application is up and running!";
+    }
 
+    @PostMapping("/user")
+    public Long save(@RequestBody User user){
+       return userService.save(user);
     }
 
 }

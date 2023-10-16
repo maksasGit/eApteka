@@ -1,6 +1,5 @@
-package JPA;
+package com.example.eapteka;
 
-import Entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {

@@ -1,8 +1,5 @@
-package Services;
+package com.example.eapteka;
 
-import Entity.User;
-import JPA.UserRepository;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,8 +16,9 @@ public class UserService {
         return userRepository.findAll(pageable);
     }
 
-    public void save(User user){
-        userRepository.saveAndFlush(user);
+    public Long save(User user){
+        System.out.println(userRepository.saveAndFlush(user).getId());
+        return userRepository.saveAndFlush(user).getId();
     }
 
 }
