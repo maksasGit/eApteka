@@ -17,8 +17,14 @@ public class UserService {
     }
 
     public Long save(User user){
-        System.out.println(userRepository.saveAndFlush(user).getId());
         return userRepository.saveAndFlush(user).getId();
     }
-
+    public String delete(Long id) {
+        if (userRepository.findById(id).isEmpty()) {
+            return "Not Found";
+        } else {
+            userRepository.deleteById(id);
+            return "Deleted";
+        }
+    }
 }

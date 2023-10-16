@@ -21,6 +21,5 @@ public class Product {
 
     private String name;
     private Float price;
-    //private Image image;
     private Integer amount;
 }
