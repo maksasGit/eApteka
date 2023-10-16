@@ -30,10 +30,10 @@ public class UserContoller {
        return userService.save(user);
     }
 
-        @PostMapping("/userdel")
-        public String delete(@RequestParam Long id){
-            return userService.delete(id);
-            //return new RedirectView("/users", true);
-        }
+    @PostMapping("/userdel")
+    public String delete(@RequestParam Long id){
+        return userService.delete(id);
+        //return new RedirectView("/users", true);
+    }
 
 }

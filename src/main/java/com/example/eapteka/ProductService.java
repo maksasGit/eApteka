@@ -26,4 +26,7 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
+    public Page<Product> getByParam(String name, Double minPrice, Double maxPrice) {
+     //   return productRepository.findAll(name , minPrice , maxPrice);
+    }
 }
