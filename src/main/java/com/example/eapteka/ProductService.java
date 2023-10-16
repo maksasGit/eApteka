@@ -47,4 +47,8 @@ public class ProductService {
 
         return productRepository.findAll(spec, pageable);
     }
+
+    public Product getByName(String productName) {
+        return productRepository.findByName(productName);
+    }
 }
