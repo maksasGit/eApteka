@@ -22,14 +22,21 @@ public class ProductController {
         return productService.save(product);
     }
 
+
+    @PostMapping("/productdel")
+    public String delete(@RequestParam Long id){
+        return productService.delete(id);
+    }
+
 // add amount > 0;
     @GetMapping("/prooductfilter")
     public Page<Product> getWithFilter(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) Double minPrice,
-            @RequestParam(required = false) Double maxPrice
+            @RequestParam(required = false) Double maxPrice,
+            Pageable pageable
     ){
-        return productService.getByParam(name,minPrice,maxPrice);
+        return productService.searchProducts(name,minPrice,maxPrice,pageable );
     }
 
 }

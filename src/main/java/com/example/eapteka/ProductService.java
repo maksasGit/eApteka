@@ -4,6 +4,7 @@ package com.example.eapteka;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,11 +23,28 @@ public class ProductService {
     }
 
 
-    public void delete(Long id){
-        productRepository.deleteById(id);
+    public String delete(Long id){
+        if (productRepository.findById(id).isEmpty()) {
+            return "Cant found";
+        }
+        else {
+            productRepository.deleteById(id);
+            return "Deleted";
+        }
+
     }
 
-    public Page<Product> getByParam(String name, Double minPrice, Double maxPrice) {
-     //   return productRepository.findAll(name , minPrice , maxPrice);
+    public Page<Product> searchProducts(String name, Double minPrice, Double maxPrice, Pageable pageable) {
+        Specification<Product> spec = Specification.where(null);
+
+        if (name != null) {
+            spec = spec.and(ProductSpecifications.withName(name));
+        }
+
+        if (minPrice != null && maxPrice != null) {
+            spec = spec.and(ProductSpecifications.withPriceBetween(minPrice, maxPrice));
+        }
+
+        return productRepository.findAll(spec, pageable);
     }
 }
