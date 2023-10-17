@@ -1,17 +1,14 @@
 package com.example.eapteka;
 
 
-import com.example.eapteka.User;
-import com.example.eapteka.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.view.RedirectView;
 
 @RestController
 @RequiredArgsConstructor
-public class UserContoller {
+public class UserController {
 
     private final UserService userService;
 

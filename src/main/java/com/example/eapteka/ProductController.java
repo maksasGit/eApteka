@@ -35,7 +35,8 @@ public class ProductController {
     }
 
 // add amount > 0;
-    @GetMapping("/prooductsfilter")
+    // add defaoult value
+    @GetMapping("/productsfilter")
     public Page<Product> searchProduct(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) Double minPrice,
