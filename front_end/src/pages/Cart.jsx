@@ -117,7 +117,7 @@ const Cart = ({ darkMode, setDarkMode }) => {
               </TopText>
             ) : null}
           </TopTexts>
-          {/* si el usuario esta logeado muestra le permite comprar, sino tiene que logearse */}
+          {/* If the user is logged in, it shows that they are allowed to buy, otherwise they have to log in. */}
           {username ? (
             <ButtonElement text={'CHECKOUT NOW'} />
           ) : (

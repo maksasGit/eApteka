@@ -81,7 +81,7 @@ const CategoryItem = ({ item }) => {
             <Title title={item.title} aria-label={item.title}>
               {item.title}
             </Title>
-            {/* componente Button */}
+            {/* Button component */}
             <ButtonElement
               text={'SHOP NOW'}
               title="SHOP NOW"

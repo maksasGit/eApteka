@@ -160,7 +160,7 @@ const Register = () => {
     setOff(false);
   };
 
-  // Función para manejar los cambios en los campos de entrada
+  // Function to handle changes to input fields
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues((prevFormValues) => ({
@@ -188,14 +188,14 @@ const Register = () => {
   return (
     <Container id={islogin ? 'SignIn' : 'SignUp'} role="contentinfo">
       <Wrapper>
-        {/* verifica si esta en el formulario de logeo o de registro */}
+        {/* Check if you are in the login or registration form */}
         <Title>{islogin ? 'SIGN IN' : Create} </Title>
         <Form role="form" aria-label={islogin ? 'SIGN IN' : Create}>
           {register.map((data) => {
             const { id, label, name, type, placeholder, errorMessage, shared } =
               data;
             if (islogin && shared) {
-              return null; // Salta el campo en el modo de inicio de sesión
+              return null; // Skip field in login mode
             }
             return (
               <InputContainer key={id}>

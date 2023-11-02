@@ -1,7 +1,7 @@
 import { publicRequest } from '../../requestMethods';
 import { handleError, handleSuccess } from '../toast';
 import { addProduct } from '../../components/redux/cartRedux';
-// añadir al carrito
+// add to cart
 
 export const addToCart = async (cart, setUserCart) => {
   try {
@@ -26,7 +26,7 @@ export const addToReduxCart = (
   size,
 ) => {
   try {
-    // Agrega un producto al carrito de Redux
+    // Add a product to the Redux cart
     dispatch(addProduct({ ...product, quantity, color, size }));
     handleSuccess('added');
     setQuantity(1);
@@ -36,7 +36,7 @@ export const addToReduxCart = (
   }
 };
 
-// Pagos
+// Paid
 
 export const payment = async (tokenId, amount, history, userCart) => {
   try {
@@ -45,7 +45,7 @@ export const payment = async (tokenId, amount, history, userCart) => {
       amount,
     });
     history.push('/success', {
-      // redirecciona al componente succes en caso de exito
+      // redirects to the succes component on success
       stripeData: res.data,
       cartId: userCart,
     });

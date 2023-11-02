@@ -166,13 +166,13 @@ const Navbar = ({ darkMode, setDarkMode }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(true);
   const dispatch = useDispatch();
 
-  // Maneja el evento de clic en el botón de cierre de sesión
+  // Handle logout button click event
   const handleClick = () => {
     logoutUser(dispatch);
     setShowPrompt(!showPrompt);
   };
   useEffect(() => {
-    // Cambia el estado de isMenuOpen al cambiar el tamaño de la ventana
+    // Change the state of isMenuOpen when resizing the window
     const handleResize = () => {
       if (window.innerWidth < 820) {
         setIsMenuOpen(false);
@@ -194,7 +194,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
       <Container role="navigation">
         <Wrapper>
           <Left>
-            {/* Icono del menú para dispositivos móviles */}
+            {/* Mobile Menu Icon */}
             <MenuIconMobile>
               <MenuRounded
                 role="menubar"
@@ -203,7 +203,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
                 style={{ cursor: 'pointer' }}
               />
             </MenuIconMobile>
-            {/* Etiqueta y botón de cambio de modo oscuro/claro */}
+            {/* Label and dark/light mode toggle button */}
             <DarkLabel
               role="menuitem"
               title={darkMode ? 'Dark' : 'Light'}
@@ -234,11 +234,11 @@ const Navbar = ({ darkMode, setDarkMode }) => {
             >
               {darkMode ? <Brightness7 /> : <Brightness2 />}
             </Item>
-            {/* Barra de búsqueda */}
+            {/* Search bar */}
             <SearchBar />
           </Left>
           <Right role="menu">
-            {/* Menú desplegable para dispositivos móviles */}
+            {/* Mobile Dropdown Menu */}
             {isMenuOpen && (
               <DropdownMenu aria-hidden={!isMenuOpen}>
                 {/* USER EXISTS? */}
@@ -284,7 +284,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
               </DropdownMenu>
             )}
           </Right>
-          {/* Elemento del carrito */}
+          {/* Cart item */}
           <Link
             to="/cart"
             style={{ textDecoration: 'none' }}
@@ -292,7 +292,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
             role="link"
           >
             <MenuItemCart>
-              {/* Icono del carrito con número de productos */}
+              {/* Cart icon with number of products */}
               <Badge
                 role="figure"
                 aria-label="shopping cart"

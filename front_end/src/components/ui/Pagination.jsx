@@ -68,7 +68,7 @@ const Pagination = ({
     <>
       {filteredProducts.length >= 8 && totalPages > 1 ? (
         <PaginationContainer tabIndex="0">
-          {/* Botón de página anterior */}
+          {/* Previous page button */}
           <Icon
             title="previous"
             aria-label="go to previous page"
@@ -85,7 +85,7 @@ const Pagination = ({
           >
             <ArrowLeftRounded />
           </Icon>
-          {/* Botones de número de página */}
+          {/* Page number buttons */}
           {[...Array(totalPages)].map((_, index) => (
             <PageButton
               title={index + 1}
@@ -99,7 +99,7 @@ const Pagination = ({
               {index + 1}
             </PageButton>
           ))}
-          {/* Botón de página siguiente */}
+          {/* Next page button */}
           <Icon
             title="next"
             aria-label="go to next page"
@@ -120,7 +120,7 @@ const Pagination = ({
           </Icon>
         </PaginationContainer>
       ) : (
-        // Renderiza un botón de página anterior si no hay suficientes productos o solo hay una página
+        // Render a previous page button if there are not enough products or there is only one page
         <PaginationContainer
           title="previous"
           aria-label="go to previous page"

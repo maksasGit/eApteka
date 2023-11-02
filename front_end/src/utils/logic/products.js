@@ -9,9 +9,9 @@ export const productById = async (id, setProduct, setColor, setSize) => {
   try {
     const res = await publicRequest.get(`/products/${id}`);
     const productResponse = { productId: res.data._id, ...res.data };
-    setProduct(productResponse); // establece el estado products en la respuesta
-    setColor(productResponse.color[0]); // establece el color al primer color devuelto
-    setSize(productResponse.size[0]); // establece el tamaño al primer tamaño devuelto
+    setProduct(productResponse); // sets the products state in the response
+    setColor(productResponse.color[0]); // sets the color to the first color returned
+    setSize(productResponse.size[0]); // sets the size to the first size returned
   } catch (error) {
     console.log(error);
     handleError(error);
@@ -35,7 +35,7 @@ export const SearchProducts = async (query) => {
 // product by tag
 
 export const getProductByTags = async (tag, currentPage, pageSize) => {
-  // obtiene los productos relacinados y le pide al backend la paginacion necesaria
+  // gets the related products and asks the backend for the necessary pagination
   try {
     const response = await publicRequest.get(
       `/products/tag?tag=${tag}&page=${currentPage}&size=${pageSize}`,
@@ -57,7 +57,7 @@ export const getProductByTags = async (tag, currentPage, pageSize) => {
 // GET ALL PRODUCTS
 
 export const getAllProducts = async (currentPage, pageSize) => {
-  // obtiene todos los productos y le pide al backend la paginacion necesaria
+  // gets all the products and asks the backend for the necessary pagination
   try {
     const response = await publicRequest.get(
       `/products?page=${currentPage}&size=${pageSize}`,

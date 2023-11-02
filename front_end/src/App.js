@@ -1,6 +1,6 @@
-import 'normalize.css'; // Normaliza los estilos CSS en diferentes navegadores
+import 'normalize.css'; // Normalize CSS styles across different browsers
 import './app.css';
-import { useSelector } from 'react-redux'; // Hook de React Redux para acceder al estado global
+import { useSelector } from 'react-redux'; // React Redux hook to access global state
 import { ThemeProvider } from 'styled-components'; 
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import {
@@ -22,19 +22,19 @@ import ProductList from './pages/ProductList';
 const REACT_APP_GOOGLEID = process.env.REACT_APP_GOOGLEID;
 
 const App = () => {
-  const user = useSelector((state) => state.user.currentUser); // Obtiene el usuario actual del estado global
+  const user = useSelector((state) => state.user.currentUser); // Gets the current user from the global state
   const getDarkModePreference = () => {
-    const preference = localStorage.getItem('darkMode'); // Obtiene la preferencia de modo oscuro almacenada en el almacenamiento local
+    const preference = localStorage.getItem('darkMode'); // Gets the dark mode preference stored in local storage
     return preference !== null ? JSON.parse(preference) : false;
   };
   const [darkMode, setDarkMode] = useState(getDarkModePreference());
 
   const setDarkModePreference = (preference) => {
-    localStorage.setItem('darkMode', JSON.stringify(preference)); // Almacena la preferencia de modo oscuro en el almacenamiento local
+    localStorage.setItem('darkMode', JSON.stringify(preference)); // Store dark mode preference to local storage
   };
 
   const handleDarkModeToggle = () => {
-    const newDarkMode = !darkMode; // Cambia el estado del modo oscuro
+    const newDarkMode = !darkMode; // Change dark mode status
     setDarkMode(newDarkMode);
     setDarkModePreference(newDarkMode);
   };
@@ -47,28 +47,28 @@ const App = () => {
           <Switch>
             <Route exact path="/">
               <Home darkMode={darkMode} setDarkMode={handleDarkModeToggle} />
-              {/* Página de inicio con soporte para modo oscuro */}
+              {/* Home page with dark mode support */}
             </Route>
             <Route path="/products/:category">
               <ProductList
                 darkMode={darkMode}
                 setDarkMode={handleDarkModeToggle}
               />
-              {/* Lista de productos de una categoría con soporte para modo oscuro */}
+              {/* List of products in a category with dark mode support */}
             </Route>
             <Route path="/product/:id">
               <Product darkMode={darkMode} setDarkMode={handleDarkModeToggle} />
-              {/* Página de un producto individual con soporte para modo oscuro */}
+              {/* Individual product page with dark mode support */}
             </Route>
             <Route path="/cart">
               <Cart darkMode={darkMode} setDarkMode={handleDarkModeToggle} />
             </Route>
             <Route path="/success">
-              <Success /> {/*Página de éxito después de realizar la orden */}
+              <Success /> {/*Success page after placing the order */}
             </Route>
             <Route path="/auth">
               {user ? <Redirect to="/" /> : <Register />}
-              {/* Redirige a la página de inicio si el usuario ya ha iniciado sesión, de lo contrario, muestra el formulario de registro */}
+              {/* Redirects to home page if user is already logged in, otherwise shows registration form */}
             </Route>
           </Switch>
         </Router>

@@ -14,12 +14,12 @@ const cartSlice = createSlice({
       );
 
       if (existingProductIndex !== -1) {
-        // El producto ya existe en el carrito
+        // The product already exists in the cart
         state.products[existingProductIndex].quantity +=
           action.payload.quantity;
         state.total += action.payload.price * action.payload.quantity;
       } else {
-        // El producto no existe en el carrito
+        // The product does not exist in the cart
         state.quantity += 1;
         state.products.push(action.payload);
         state.total += action.payload.price * action.payload.quantity;
@@ -31,15 +31,15 @@ const cartSlice = createSlice({
       );
 
       if (existingProductIndex !== -1) {
-        // El producto existe en el carrito
+        // The product exists in the cart
         const existingProduct = state.products[existingProductIndex];
 
         if (existingProduct.quantity > 1) {
-          // Hay más de una instancia del producto en el carrito
+          // There is more than one instance of the product in the cart
           existingProduct.quantity -= 1;
           state.total -= existingProduct.price;
         } else {
-          // Solo hay una instancia del producto en el carrito
+          // There is only one instance of the product in the cart
           state.quantity -= 1;
           state.products.splice(existingProductIndex, 1);
           state.total -= existingProduct.price;

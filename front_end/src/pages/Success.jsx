@@ -58,7 +58,7 @@ const Success = () => {
       }
     };
 
-    // Se verifica si el ID del pedido es null antes de crear la orden
+    // Checks if the order ID is null before creating the order
     if (orderId === null) {
       data && createOrder();
     }

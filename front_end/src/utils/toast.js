@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify';
-// Mensajes de éxito y error para los toasts
+// Success and error messages for toasts
 export const Toast = {
   success: {
     removed: 'removed from cart succesfully!',
@@ -19,7 +19,7 @@ export const Toast = {
     403: 'Forbiden',
   },
 };
-// Manejo de errores para mostrar los mensajes de error correspondientes
+// Error handling to display corresponding error messages
 export const handleError = (error) => {
   if (error.response && error.response.status) {
     const statusCode = error.response.status;
@@ -33,7 +33,7 @@ export const handleError = (error) => {
     toast.error(error.message);
   }
 };
-// Manejo de éxito para mostrar los mensajes de éxito correspondientes
+// Success handling to display corresponding success messages
 export const handleSuccess = (message) => {
   const successMessages = Toast.success;
   const successKeys = Object.keys(successMessages);

@@ -24,27 +24,27 @@ const Wrapper = styled.div`
 `;
 
 const Products = ({ tag, filters, sort, query }) => {
-  // Estado para almacenar los productos y los productos filtrados
+  // Status to store products and filtered products
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Estado para controlar la paginación
+  // State to control pagination
   const [showPagination, setShowPagination] = useState(true);
 
   const [pageSize, setPageSize] = useState(8);
   const [totalPages, setTotalPages] = useState(0);
 
-  // Maneja el cambio de página
+  // Handles the page change
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
-  // Función para obtener los productos
+  // Function to get the products
   const getProducts = useCallback(async () => {
     const res = await getProductsFunction(currentPage, pageSize, tag, query);
-    // Actualiza el estado de los productos y el número total de páginas
+    // Update the status of the products and the total number of pages
     if (res.data.products) {
       setProducts(res.data.products);
     } else if (res.data) {
@@ -55,12 +55,12 @@ const Products = ({ tag, filters, sort, query }) => {
     setTotalPages(res.data.totalPages);
   }, [tag, currentPage, pageSize, query]);
 
-  // Llama a la función getProducts al montar el componente o cuando cambian los parámetros
+  // Call the getProducts function when mounting the component or when parameters change
   useEffect(async () => {
     await getProducts();
   }, [getProducts]);
 
-  // Filtra los productos según los parámetros de filtro y actualiza los productos filtrados
+  // Filter products based on filter parameters and update filtered products
   useEffect(() => {
     if (products.length > 0) {
       if (tag || query) {
@@ -80,7 +80,7 @@ const Products = ({ tag, filters, sort, query }) => {
     }
   }, [products, tag, filters, query]);
 
-  // Ordena los productos según el tipo de orden seleccionado (newest, asc, desc)
+  // Sorts the products according to the selected order type (newest, asc, desc)
   useEffect(() => {
     if (sort === 'newest') {
       setFilteredProducts((prev) =>
@@ -98,7 +98,7 @@ const Products = ({ tag, filters, sort, query }) => {
   }, [sort]);
 
   return (
-    // renderiza los productos y si no cargaron, renderiza el componente Loading
+    // renders the products and if they did not load, renders the Loading component
     <Container id="Products">
       {products.length > 0 ? (
         <Wrapper>
@@ -122,7 +122,7 @@ const Products = ({ tag, filters, sort, query }) => {
         <Loading />
       )}
 
-      {/* Renderizar paginación */}
+      {/* Render Pagination */}
 
       <Pagination
         filteredProducts={filteredProducts}

@@ -10,7 +10,7 @@ ReactDOM.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <App />
-      {/* Configuración de Toast */}
+      {/* Toast Settings */}
       <ToastContainer
         autoClose={500}
         hideProgressBar={true}

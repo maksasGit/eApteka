@@ -41,13 +41,13 @@ const Cell = styled.div`
   padding: 0.7rem;
   background-color: ${({ theme, status }) =>
     status == 'pendiente'
-      ? theme.orange // naranja para 'pendiente'
+      ? theme.orange // orange for 'pending'
       : status == 'recibido'
-      ? theme.lightGreen // Verde para 'recibido'
+      ? theme.lightGreen // Green for 'received'
       : status == 'enviado'
-      ? theme.darkBlue // azul  para 'enviado'
+      ? theme.darkBlue // blue for 'sent'
       : status == 'rechazado'
-      ? theme.red // Rojo para 'rechazado'
+      ? theme.red // Red for 'rejected'
       : theme.soft};
 `;
 const Info = styled.p`
@@ -144,11 +144,11 @@ const Orders = ({ userId }) => {
     setSelectedStatus(event.target.value);
   };
 
-  // Calcular el índice de inicio y fin para los pedidos de la página actual
+  // Calculate the start and end index for orders on the current page
   const startIndex = (currentPage - 1) * 8;
   const endIndex = startIndex + 8;
 
-  // Obtener los pedidos de la página actual
+  // Get orders from current page
   const filteredOrders = selectedStatus
     ? orders.filter((o) => o.shippingStatus == selectedStatus)
     : orders;

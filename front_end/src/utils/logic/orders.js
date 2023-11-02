@@ -1,6 +1,6 @@
 import { publicRequest } from '../../requestMethods';
 import { handleError, handleSuccess } from '../toast';
-// crear orden
+// create order
 
 export const makeOrder = async (address, cartId, amount) => {
   try {
@@ -9,7 +9,7 @@ export const makeOrder = async (address, cartId, amount) => {
       cartId,
       amount,
     });
-    const { data } = response; // Accede directamente a la propiedad 'data' en el objeto de respuesta
+    const { data } = response; // Directly access the 'data' property on the response object
     return data;
   } catch (error) {
     console.log(error);
@@ -18,7 +18,7 @@ export const makeOrder = async (address, cartId, amount) => {
   }
 };
 
-// obtener ordenes
+// get orders
 
 export const getOrders = async (userId, setOrdersLoad) => {
   try {
@@ -45,7 +45,7 @@ export const deleteOrder = async (orderId) => {
   }
 };
 
-// FUNCION DE FORMATEO DE FECHAS
+// DATE FORMATTING FUNCTION
 
 export const formatCreatedAt = (createdAt) => {
   const date = new Date(createdAt);

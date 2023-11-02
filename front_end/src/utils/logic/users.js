@@ -74,9 +74,9 @@ export const findByEmail = async (email) => {
 
 // functionals functions
 
-// Registrar un usuario
+// Register a user
 export const handleRegistration = async (email, password, username, setMsg) => {
-  // Realiza la solicitud de registro y maneja las respuestas.
+  // Make the registration request and manage the responses.
   console.log(email + ' email', password + ' password', username + ' username');
   try {
     await publicRequest.post('/users/signUp', {
@@ -94,15 +94,15 @@ export const handleRegistration = async (email, password, username, setMsg) => {
   }
 };
 
-// Iniciar sesión
+// Log in
 export const login = async (dispatch, email, password, setMsg) => {
-  // Realiza la solicitud de inicio de sesión y maneja las respuestas y errores correspondientes
+  // Make the login request and handle the corresponding responses and errors
   setMsg('login');
   dispatch(loginStart());
   const time = 48 * 60 * 60 * 1000;
   try {
     const res = await publicRequest.post('/users/signIn', { email, password });
-    dispatch(loginSuccess(res.data)); // usa redux para logear al usuario
+    dispatch(loginSuccess(res.data)); // use redux to log in the user
     handleSuccess('welcome');
     setTimeout(() => {
       logoutUser(dispatch);
@@ -111,7 +111,7 @@ export const login = async (dispatch, email, password, setMsg) => {
     setMsg(error.message);
     console.log(error);
     handleError(error);
-    dispatch(loginFailure()); // cancela la accion
+    dispatch(loginFailure()); // cancel the action
   }
 };
 
@@ -127,7 +127,7 @@ export const googleLogin = async (token) => {
 };
 
 export const logoutUser = (dispatch) => {
-  // Cierra la sesión del usuario
+  // Log out the user
   try {
     dispatch(logout());
     handleSuccess('logout');
