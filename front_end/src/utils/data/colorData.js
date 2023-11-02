@@ -2,59 +2,59 @@ export const color = [
   { id: 11, prop: 'All', value: 'All' },
   {
     id: 12,
-    prop: 'black',
-    value: 'black',
+    prop: 'med1',
+    value: 'med1',
   },
   {
     id: 13,
-    prop: 'white',
-    value: 'white',
+    prop: 'med2',
+    value: 'med2',
   },
   {
     id: 14,
-    prop: 'red',
-    value: 'red',
+    prop: 'med3',
+    value: 'med3',
   },
   {
     id: 15,
-    prop: 'yellow',
-    value: 'yellow',
+    prop: 'med4',
+    value: 'med4',
   },
   {
     id: 16,
-    prop: 'green',
-    value: 'green',
+    prop: 'med5',
+    value: 'med5',
   },
 ];
 
 export const size = [
   { id: 0, prop: 'All', value: 'All' },
 
-  { id: 1, prop: 'S', value: 'S' },
+  { id: 1, prop: '10', value: '10' },
   {
     id: 2,
-    prop: 'M',
-    value: 'M',
+    prop: '25',
+    value: '25',
   },
   {
     id: 3,
-    prop: 'L',
-    value: 'L',
+    prop: '40',
+    value: '40',
   },
   {
     id: 4,
-    prop: 'XS',
-    value: 'XS',
+    prop: '50',
+    value: '50',
   },
   {
     id: 5,
-    prop: 'XM',
-    value: 'XM',
+    prop: '60',
+    value: '60',
   },
   {
     id: 6,
-    prop: 'XL',
-    value: 'XL',
+    prop: '100',
+    value: '100',
   },
 ];
 
@@ -66,8 +66,8 @@ export const price = [
 
 export const statusData = [
   { id: 0, prop: 'All', value: '' },
-  { id: 1, prop: 'Pendiente', value: 'pendiente' },
-  { id: 2, prop: 'Enviado', value: 'enviado' },
-  { id: 3, prop: 'Recibido', value: 'recibido' },
-  { id: 4, prop: 'Rechazado', value: 'rechazado' },
+  { id: 1, prop: 'med1', value: 'med1' },
+  { id: 2, prop: 'med2', value: 'med2' },
+  { id: 3, prop: 'med3', value: 'med3' },
+  { id: 4, prop: 'med4', value: 'med4' },
 ];
