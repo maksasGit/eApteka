@@ -7,6 +7,7 @@ function addToCart(product) {
   
   //Update  count in  UI
   updateCartCount();
+  displayCartContents();
 }
 
 function redirectToCard() {
@@ -15,11 +16,25 @@ function redirectToCard() {
 
 
 function updateCartCount() {
+  
   const cartCountElement = document.querySelector('.bi-cart-fill + span');
   cartCountElement.textContent = cart.length;
 }
 
+    //display cart contents
+    function displayCartContents() {
+      const cartContainer = document.getElementById('cartContainer');
+      cartContainer.innerHTML = ''; //clear existing cart contents
+
+      cart.forEach(product => {
+          const productElement = document.createElement('p');
+          productElement.textContent = `${product.name} - $${product.minPrice} to $${product.maxPrice}`;
+          cartContainer.appendChild(productElement);
+      });
+  }
+
 document.addEventListener('DOMContentLoaded', function () {
+  
   fetch('https://mocki.io/v1/c01691bb-7f61-447c-9e77-ca8b2748ff66')
   .then(response => response.json())
   .then(data => {
