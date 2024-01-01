@@ -9,6 +9,10 @@ function addToCart(product) {
   updateCartCount();
 }
 
+function redirectToCard() {
+  window.location.href = "card.html";
+}
+
 
 function updateCartCount() {
   const cartCountElement = document.querySelector('.bi-cart-fill + span');
