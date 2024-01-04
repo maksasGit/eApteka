@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="099ba858-a8ff-43b0-be28-58049fe4f14c" name="Changes" comment="a" />
+    <list default="true" id="099ba858-a8ff-43b0-be28-58049fe4f14c" name="Changes" comment="a">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,9 +35,16 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "T:/WORK/UMCS/eApteka/back_end"
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/imaks/OneDrive/Desktop/eApteka/back_end",
+    "spring.configuration.checksum": "006c46edf2dbd2492a530f946a7988b5"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="Unnamed" type="CompoundRunConfigurationType">
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -44,6 +53,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1698409944237</updated>
+      <workItem from="1704375983519" duration="443000" />
+      <workItem from="1704376440162" duration="23000" />
     </task>
     <task id="LOCAL-00001" summary="a">
       <created>1698416664245</created>
@@ -54,6 +65,9 @@
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

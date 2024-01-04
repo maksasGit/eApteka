@@ -17,10 +17,15 @@ public class ProductController {
         return productService.getAllProducts(pageable);
     }
 
+
+
+    // stack the same
+
     @PostMapping("/product")
-    public Long save(@RequestBody Product product){
-        return productService.save(product);
+    public void createNew(@RequestBody Product product){
+        productService.createProduct(product);
     }
+
 
 
     @GetMapping("/products/{productName}")
@@ -31,7 +36,7 @@ public class ProductController {
 
     @PostMapping("/productdel")
     public String delete(@RequestParam Long id){
-        return productService.delete(id);
+        return productService.deleteById(id);
     }
 
 // add amount > 0;
