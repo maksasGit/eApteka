@@ -4,51 +4,52 @@ package com.example.eapteka;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RequiredArgsConstructor
 @RestController
+@RequestMapping("/products")
+@RequiredArgsConstructor
 public class ProductController {
 
     private final ProductService productService;
-
-    @GetMapping("/products")
-    public Page<Product> getAll(Pageable pageable){
-        return productService.getAllProducts(pageable);
-    }
-
-
-
-    // stack the same
-
-    @PostMapping("/product")
-    public void createNew(@RequestBody Product product){
-        productService.createProduct(product);
-    }
-
-
-
-    @GetMapping("/products/{productName}")
-    public Product showProduct(@PathVariable String productName){
-        return productService.getByName(productName);
-    }
-
-
-    @PostMapping("/productdel")
-    public String delete(@RequestParam Long id){
-        return productService.deleteById(id);
-    }
-
-// add amount > 0;
-    // add defaoult value
-    @GetMapping("/productsfilter")
-    public Page<Product> searchProduct(
+    @GetMapping
+    public ResponseEntity<Page<Product>> getProducts(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) Double minPrice,
             @RequestParam(required = false) Double maxPrice,
+            @RequestParam(required = false) Boolean amount,
             Pageable pageable
-    ){
-        return productService.searchProducts(name,minPrice,maxPrice,pageable );
+    ) {
+        if (name == null && minPrice == null && maxPrice == null && amount == null) {
+            return ResponseEntity.ok(productService.getAllProducts(pageable));
+        } else {
+            return ResponseEntity.ok(productService.searchProducts(name, minPrice, maxPrice, amount,  pageable));
+        }
     }
+
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Product> getProductById(@PathVariable Long id) {
+        return ResponseEntity.ok(productService.getById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
+        return ResponseEntity.ok(productService.createProduct(product));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product product) {
+        Product updatedProduct = productService.updateProduct(id, product);
+        return ResponseEntity.ok(updatedProduct);
+    }
+
+    @PutMapping("/{id}/quantity")
+    public ResponseEntity<Product> updateProductQuantity(@PathVariable Long id, @RequestParam int amountChange) {
+        Product updatedProduct = productService.updateProductQuantity(id, amountChange);
+        return ResponseEntity.ok(updatedProduct);
+    }
+
 
 }
