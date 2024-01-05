@@ -12,19 +12,87 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public Page<User> getAllUsers(Pageable pageable){
+    // ##################################
+    // #################################
+    // POST
+    // ##################################
+    // ##################################
+
+    public User createNewUser(User user) {
+        return userRepository.save(user);
+    }
+
+
+    // ##################################
+    // #################################
+    // GET
+    // ##################################
+    // ##################################
+
+
+    public Page<User> getAllUsers(Pageable pageable) {
         return userRepository.findAll(pageable);
     }
 
-    public Long save(User user){
-        return userRepository.saveAndFlush(user).getId();
+    public User getUserById(Long id){
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        return user;
     }
-    public String delete(Long id) {
-        if (userRepository.findById(id).isEmpty()) {
-            return "Not Found";
-        } else {
-            userRepository.deleteById(id);
-            return "Deleted";
+
+
+    // ##################################
+    // #################################
+    // PUT
+    // ##################################
+    // ##################################
+
+    public User updateUserDetails(Long id, User userDetails) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with ID: " + id));
+        if (userDetails.getUsername() != null){
+            updateUserUsername(id, userDetails.getUsername());
         }
+        if (userDetails.getPassword() != null){
+            updateUserPassword(id, userDetails.getPassword());
+        }
+        if (userDetails.getEmail() != null){
+            updateUserEmail(id, userDetails.getEmail());
+        }
+        return userRepository.save(user);
     }
+
+    public User updateUserUsername(Long id, String username) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with ID: " + id));
+        user.setUsername(username);
+        return userRepository.save(user);
+    }
+
+    public User updateUserPassword(Long id, String password) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with ID: " + id));
+        user.setPassword(password);
+        return userRepository.save(user);
+    }
+
+    public User updateUserEmail(Long id, String email) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with ID: " + id));
+        user.setEmail(email);
+        return userRepository.save(user);
+    }
+
+
+    // ##################################
+    // #################################
+    // DELETE
+    // ##################################
+    // ##################################
+
+
+    public void deleteUserById(Long id) {
+        userRepository.deleteById(id);
+    }
+
 }
