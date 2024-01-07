@@ -8,6 +8,13 @@ function addToCart(product) {
     updateCartCount();
 }
 
+
+// fetch('http://localhost:8080/users')
+//     .then(response => response.json())
+//     .then(data => console.log(data))
+//     .catch(error => console.error('Error:', error));
+
+
 //cart count in  UI
 function updateCartCount() {
     const cartCountElement = document.querySelector('.bi-cart-fill + span');

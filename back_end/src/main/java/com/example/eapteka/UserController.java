@@ -7,12 +7,17 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
+
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*") // Разрешить запросы со всех доменов
 public class UserController {
 
     private final UserService userService;
+
+    //private final PasswordEncoder passwordEncoder;
 
     @GetMapping
     public ResponseEntity<Page<User>> getAllUsers(Pageable pageable) {
@@ -24,8 +29,9 @@ public class UserController {
         return ResponseEntity.ok(userService.getUserById(id));
     }
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<User> createUser(@RequestBody User user) {
+        System.out.println("success " + user.toString());
         return ResponseEntity.ok(userService.createNewUser(user));
     }
 
@@ -41,3 +47,14 @@ public class UserController {
     }
 
 }
+//
+//    @PostMapping("/login")
+//    public ResponseEntity<?> loginUser(@RequestBody User user) {
+//        User existingUser = userService.getUserByUsername(user.getUsername());
+//        if (existingUser != null && passwordEncoder.matches(user.getPassword(), existingUser.getPassword())) {
+//            return ResponseEntity.ok("User authenticated successfully");
+//        }
+//        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+//    }
+//
+//}
