@@ -1,31 +1,23 @@
-//get the cart from the cooki
 let cart = JSON.parse(getCookie('cart')) || [];
 
-//add a product to the cart
 function addToCart(product) {
     cart.push(product);
     setCookie('cart', JSON.stringify(cart), 7); // Store the cart in a cookie for 7 days
     updateCartCount();
 }
 
-
-// fetch('http://localhost:8080/users')
-//     .then(response => response.json())
-//     .then(data => console.log(data))
-//     .catch(error => console.error('Error:', error));
-
-
-//cart count in  UI
+// Update cart count in UI
 function updateCartCount() {
     const cartCountElement = document.querySelector('.bi-cart-fill + span');
-    cartCountElement.textContent = cart.length;
+    if (cartCountElement) {
+        cartCountElement.textContent = cart.length;
+    }
 }
 
 function redirectToCart() {
-  window.location.href = "cart.html";
+    window.location.href = "cart.html";
 }
 
-//set a cookie
 function setCookie(name, value, days) {
     var expires = "";
     if (days) {
@@ -36,7 +28,6 @@ function setCookie(name, value, days) {
     document.cookie = name + "=" + (value || "") + expires + "; path=/";
 }
 
-//get a cookie
 function getCookie(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
@@ -49,123 +40,203 @@ function getCookie(name) {
 }
 
 function displayCartContents() {
-  const cartItemsContainer = document.querySelector('.card-body'); 
+    const cartItemsContainer = document.querySelector('.card-body');
+    if (cartItemsContainer) {
+        cartItemsContainer.innerHTML = '';
+        cart.forEach(product => {
+            const itemRow = document.createElement('div');
+            itemRow.classList.add('row');
 
-  if (cartItemsContainer) {
-      cartItemsContainer.innerHTML = ''; 
+            const imgDiv = document.createElement('div');
+            imgDiv.classList.add('col-lg-3', 'col-md-12', 'mb-4', 'mb-lg-0');
+            const img = document.createElement('img');
+            img.src = product.imageUrl;
+            img.classList.add('w-100');
+            imgDiv.appendChild(img);
 
-      cart.forEach(product => {
-          
-          const itemRow = document.createElement('div');
-          itemRow.classList.add('row');
-          
-          const imgDiv = document.createElement('div');
-          imgDiv.classList.add('col-lg-3', 'col-md-12', 'mb-4', 'mb-lg-0');
-          const img = document.createElement('img');
-          img.src = product.imageUrl;
-          img.classList.add('w-100');
-          imgDiv.appendChild(img);
+            const nameDiv = document.createElement('div');
+            nameDiv.classList.add('col-lg-5', 'col-md-6', 'mb-4', 'mb-lg-0');
+            const productName = document.createElement('p');
+            productName.textContent = product.name;
+            nameDiv.appendChild(productName);
 
-          const nameDiv = document.createElement('div');
-          nameDiv.classList.add('col-lg-5', 'col-md-6', 'mb-4', 'mb-lg-0');
-          const productName = document.createElement('p');
-          productName.textContent = product.name;
-          nameDiv.appendChild(productName);
+            itemRow.appendChild(imgDiv);
+            itemRow.appendChild(nameDiv);
 
-          
-          itemRow.appendChild(imgDiv);
-          itemRow.appendChild(nameDiv);
-          
-          
-          cartItemsContainer.appendChild(itemRow);
-      });
-  }
+            cartItemsContainer.appendChild(itemRow);
+        });
+    }
+}
+
+function updateNavbarForUserStatus() {
+    const user = getCookie('user');
+    const userDropdown = document.getElementById('userDropdown');
+    const registerButton = document.getElementById('registerButton');
+    const loginButton = document.getElementById('loginButton');
+
+    if (user) {
+        const userData = JSON.parse(user);
+        userDropdown.style.display = 'block';
+        userDropdown.querySelector('.dropdown-toggle').textContent = userData.username;
+        registerButton.style.display = 'none';
+        loginButton.style.display = 'none';
+    } else {
+        userDropdown.style.display = 'none';
+        registerButton.style.display = 'block';
+        loginButton.style.display = 'block';
+    }
 }
 
 
-document.addEventListener('DOMContentLoaded', function () {
-    updateCartCount(); 
 
+
+
+
+function logout() {
+    // Видаліть кукі 'user'
+    setCookie('user', '', -1); // Встановіть минулу дату, щоб видалити кукі
+    window.location.reload(); // Перезавантажте сторінку, щоб оновити стан
+}
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    updateNavbarForUserStatus();
+    updateCartCount();
     
     if (!window.location.pathname.includes("cart.html")) {
         fetch('https://mocki.io/v1/4dc9188b-4d45-47f9-9725-5d58d559492e')
-        .then(response => response.json())
-        .then(data => {
-            const productsContainer = document.getElementById('productsContainer');
+            .then(response => response.json())
+            .then(products => {
+                const productsContainer = document.getElementById('productsContainer');
+                if (productsContainer) {
+                    products.forEach(product => {
+                        const colDiv = document.createElement('div');
+                        colDiv.classList.add('col', 'mb-5');
 
-            data.forEach(product => {
-          
-              const colDiv = document.createElement('div');
-              colDiv.classList.add('col', 'mb-5');
-          
-              
-              const cardDiv = document.createElement('div');
-              cardDiv.classList.add('card', 'h-100');
-          
-              
-              const img = document.createElement('img');
-              img.classList.add('card-img-top');
-              img.src = product.imageUrl; 
-              img.alt = 'Product Image';
-          
-              
-              const cardBodyDiv = document.createElement('div');
-              cardBodyDiv.classList.add('card-body', 'p-4');
-          
-              
-              const textCenterDiv = document.createElement('div');
-              textCenterDiv.classList.add('text-center');
-          
-              
-              const productName = document.createElement('h5');
-              productName.classList.add('fw-bolder');
-              productName.textContent = product.name;
-          
-              
-              const productPrice = document.createElement('p');
-              productPrice.textContent = `${product.minPrice}zł - ${product.maxPrice}zł`; 
-          
-              
-              textCenterDiv.appendChild(productName);
-              textCenterDiv.appendChild(productPrice);
-              cardBodyDiv.appendChild(textCenterDiv);
-              cardDiv.appendChild(img);
-              cardDiv.appendChild(cardBodyDiv);
-          
-              
-              const cardFooterDiv = document.createElement('div');
-              cardFooterDiv.classList.add('card-footer', 'p-4', 'pt-0', 'border-top-0', 'bg-transparent');
-          
-              
-              const footerTextCenterDiv = document.createElement('div');
-              footerTextCenterDiv.classList.add('text-center');
-          
-              
-              const addToCartBtn = document.createElement('button');
-              addToCartBtn.classList.add('btn', 'btn-outline-dark', 'mt-3');
-              addToCartBtn.textContent = 'Do koszyka';
-              addToCartBtn.onclick = function() {
-                  addToCart(product); 
-              };
-          
-            
-              footerTextCenterDiv.appendChild(addToCartBtn);
-              cardFooterDiv.appendChild(footerTextCenterDiv);
-              cardDiv.appendChild(cardFooterDiv);
-              colDiv.appendChild(cardDiv);
-          
-              
-              productsContainer.appendChild(colDiv);
-          });
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-        });
+                        const cardDiv = document.createElement('div');
+                        cardDiv.classList.add('card', 'h-100');
+
+                        const img = document.createElement('img');
+                        img.classList.add('card-img-top');
+                        img.src = product.imageUrl;
+                        img.alt = 'Product Image';
+
+                        const cardBodyDiv = document.createElement('div');
+                        cardBodyDiv.classList.add('card-body', 'p-4');
+
+                        const textCenterDiv = document.createElement('div');
+                        textCenterDiv.classList.add('text-center');
+
+                        const productName = document.createElement('h5');
+                        productName.classList.add('fw-bolder');
+                        productName.textContent = product.name;
+
+                        const productPrice = document.createElement('p');
+                        productPrice.textContent = `${product.minPrice}zł - ${product.maxPrice}zł`;
+
+                        textCenterDiv.appendChild(productName);
+                        textCenterDiv.appendChild(productPrice);
+                        cardBodyDiv.appendChild(textCenterDiv);
+                        cardDiv.appendChild(img);
+                        cardDiv.appendChild(cardBodyDiv);
+
+                        const cardFooterDiv = document.createElement('div');
+                        cardFooterDiv.classList.add('card-footer', 'p-4', 'pt-0', 'border-top-0', 'bg-transparent');
+
+                        const footerTextCenterDiv = document.createElement('div');
+                        footerTextCenterDiv.classList.add('text-center');
+
+                        const addToCartBtn = document.createElement('button');
+                        addToCartBtn.classList.add('btn', 'btn-outline-dark', 'mt-3');
+                        addToCartBtn.textContent = 'Add to cart';
+                        addToCartBtn.onclick = function() {
+                            addToCart(product);
+                        };
+
+                        footerTextCenterDiv.appendChild(addToCartBtn);
+                        cardFooterDiv.appendChild(footerTextCenterDiv);
+                        cardDiv.appendChild(cardFooterDiv);
+                        colDiv.appendChild(cardDiv);
+
+                        productsContainer.appendChild(colDiv);
+                    });
+                }
+            })
+            .catch(error => console.error('Error fetching data:', error));
     }
 
-    //display the cart contents if on the cart page
+
     if (window.location.pathname.includes("cart.html")) {
         displayCartContents();
     }
+
+   
+    const userStatusElement = document.getElementById('userStatus');
+    const user = getCookie('user');
+    if (user) {
+        const userData = JSON.parse(user);
+        userStatusElement.innerHTML = `<p>Logged in as: <strong>${userData.username}</strong></p>`;
+    } else {
+        
+            userStatusElement.innerHTML = '<p>You are not logged in</p>';
+        
+    }
+
+    
+    const registerForm = document.getElementById('registerForm');
+    if (registerForm) {
+        registerForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const user = Object.fromEntries(formData.entries());
+
+            fetch('http://localhost:8080/users/register', {
+                method: 'POST',
+                body: JSON.stringify(user),
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                setCookie('user', JSON.stringify(data), 7); 
+                window.location.href = 'index.html'; 
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    }
 });
 
+
+
+document.getElementById('registerForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const user = Object.fromEntries(formData.entries());
+
+    fetch('http://localhost:8080/users/register', {
+        method: 'POST',
+        body: JSON.stringify(user),
+        headers: { 'Content-Type': 'application/json' }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data && data.username) { 
+            console.log(data);
+            setCookie('user', JSON.stringify(data), 7); 
+            window.location.href = 'index.html'; 
+        } else {
+            console.error('Registration failed');
+            
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        
+    });
+});
