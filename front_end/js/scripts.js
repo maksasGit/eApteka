@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     
     if (!window.location.pathname.includes("cart.html")) {
-        fetch('https://mocki.io/v1/c01691bb-7f61-447c-9e77-ca8b2748ff66')
+        fetch('https://mocki.io/v1/4dc9188b-4d45-47f9-9725-5d58d559492e')
         .then(response => response.json())
         .then(data => {
             const productsContainer = document.getElementById('productsContainer');
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function () {
           
               
               const productPrice = document.createElement('p');
-              productPrice.textContent = `$${product.minPrice} - $${product.maxPrice}`; 
+              productPrice.textContent = `${product.minPrice}zł - ${product.maxPrice}zł`; 
           
               
               textCenterDiv.appendChild(productName);
