@@ -1,13 +1,5 @@
 let cart = JSON.parse(getCookie('cart')) || [];
 
-//delete product from the cart
-function deleteFromCart(product){
-    cart.splice(cart.indexOf(product),1);
-    setCookie('cart', JSON.stringify(cart), 7); // Store the cart in a cookie for 7 days
-    updateCartCount();
-    // location.reload();
-}
-//add a product to the cart
 function addToCart(product) {
     cart.push(product);
     setCookie('cart', JSON.stringify(cart), 7); // Store the cart in a cookie for 7 days
@@ -48,94 +40,63 @@ function getCookie(name) {
 }
 
 function displayCartContents() {
-    const cartItemsContainer = document.querySelector('.card-body'); 
-  
+    const cartItemsContainer = document.querySelector('.card-body');
     if (cartItemsContainer) {
-        cartItemsContainer.innerHTML = ''; 
-  
+        cartItemsContainer.innerHTML = '';
         cart.forEach(product => {
-            
             const itemRow = document.createElement('div');
             itemRow.classList.add('row');
-            
+
             const imgDiv = document.createElement('div');
             imgDiv.classList.add('col-lg-3', 'col-md-12', 'mb-4', 'mb-lg-0');
-            const imgContainer = document.createElement('div');
-            imgContainer.classList.add('bg-image', 'hover-overlay', 'hover-zoom', 'ripple', 'rounded');
-            imgContainer.setAttribute('data-mdb-ripple-color', 'light');
             const img = document.createElement('img');
             img.src = product.imageUrl;
             img.classList.add('w-100');
-            img.alt = product.name;
-            imgContainer.appendChild(img);
-            const imgLink = document.createElement('a');
-            imgLink.href = '#!';
-            const imgMask = document.createElement('div');
-            imgMask.classList.add('mask');
-            imgMask.style.backgroundColor = 'rgba(251, 251, 251, 0.2)';
-            imgLink.appendChild(imgMask);
-            imgContainer.appendChild(imgLink);
-            imgDiv.appendChild(imgContainer);
-  
+            imgDiv.appendChild(img);
+
             const nameDiv = document.createElement('div');
             nameDiv.classList.add('col-lg-5', 'col-md-6', 'mb-4', 'mb-lg-0');
             const productName = document.createElement('p');
             productName.textContent = product.name;
             nameDiv.appendChild(productName);
-  
-            // Add other product details here
-            
             itemRow.appendChild(imgDiv);
             itemRow.appendChild(nameDiv);
-            
-            // Add quantity and price divs here
-            
-            const quantityDiv = document.createElement('div');
-            quantityDiv.classList.add('col-lg-4', 'col-md-6', 'mb-4', 'mb-lg-0');
-            const quantityContainer = document.createElement('div');
-            quantityContainer.classList.add('d-flex', 'mb-4');
-            quantityContainer.style.maxWidth = '300px';
-            // const decreaseButton = document.createElement('button');
-            // decreaseButton.classList.add('btn', 'btn-primary', 'px-3', 'me-2');
-            // decreaseButton.onclick = function() { this.parentNode.querySelector('input[type=number]').stepDown() };
-            // decreaseButton.innerHTML = '<i class="fas fa-minus"></i>';
-            const increaseButton = document.createElement('button');
-            increaseButton.classList.add('btn', 'btn-danger', 'px-3', 'ms-3');
-            increaseButton.onclick = function() {deleteFromCart(product);};
-            increaseButton.innerHTML = '<i class="bi bi-trash"></i>';
-            const quantityInputContainer = document.createElement('div');
-            quantityInputContainer.classList.add('form-outline');
-            const quantityInput = document.createElement('input');
-            quantityInput.id = 'form1';
-            quantityInput.min = '0';
-            quantityInput.name = 'quantity';
-            quantityInput.value = '1';
-            quantityInput.type = 'number';
-            quantityInput.classList.add('form-control');
-            const quantityLabel = document.createElement('label');
-            quantityLabel.classList.add('form-label');
-            quantityLabel.for = 'form1';
-            // quantityLabel.textContent = 'Ilość';
-            quantityInputContainer.appendChild(quantityInput);
-            quantityInputContainer.appendChild(quantityLabel);
-            // quantityContainer.appendChild(decreaseButton);
-            quantityContainer.appendChild(quantityInputContainer);
-            quantityContainer.appendChild(increaseButton);
-            quantityDiv.appendChild(quantityContainer);
-            
-            const priceP = document.createElement('p');
-            priceP.classList.add('text-start', 'text-md-center');
-            // priceP.textContent = maxPrice; // Replace with actual price
-            quantityDiv.appendChild(priceP);
-            
-            itemRow.appendChild(quantityDiv);
-            
+
             cartItemsContainer.appendChild(itemRow);
         });
     }
-  }
-  
-  
+}
+
+function updateNavbarForUserStatus() {
+    const user = getCookie('user');
+    const userDropdown = document.getElementById('userDropdown');
+    const registerButton = document.getElementById('registerButton');
+    const loginButton = document.getElementById('loginButton');
+
+    if (user) {
+        const userData = JSON.parse(user);
+        userDropdown.style.display = 'block';
+        userDropdown.querySelector('.dropdown-toggle').textContent = userData.username;
+        registerButton.style.display = 'none';
+        loginButton.style.display = 'none';
+    } else {
+        userDropdown.style.display = 'none';
+        registerButton.style.display = 'block';
+        loginButton.style.display = 'block';
+    }
+}
+
+
+
+
+
+
+function logout() {
+    // Видаліть кукі 'user'
+    setCookie('user', '', -1); // Встановіть минулу дату, щоб видалити кукі
+    window.location.reload(); // Перезавантажте сторінку, щоб оновити стан
+}
+
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -259,22 +220,24 @@ document.getElementById('registerForm').addEventListener('submit', function(even
     })
     .then(response => {
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            return response.json().then(err => {
+                throw new Error(err.message || 'Registration failed due to an unknown error');
+            });
         }
         return response.json();
     })
     .then(data => {
-        if (data && data.username) { 
-            console.log(data);
-            setCookie('user', JSON.stringify(data), 7); 
-            window.location.href = 'index.html'; 
+        if (data && data.username) {
+            console.log('Registration successful:', data);
+            setCookie('user', JSON.stringify(data), 7);
+            window.location.href = 'index.html';
         } else {
-            console.error('Registration failed');
-            
+            throw new Error('Registration failed: No user data returned');
         }
     })
     .catch(error => {
-        console.error('Error:', error);
-        
+        console.error('Error:', error.message);
+        alert(error.message); // Display specific error message to the user
     });
 });
+

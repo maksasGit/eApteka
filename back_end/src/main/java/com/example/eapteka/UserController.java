@@ -30,10 +30,18 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        System.out.println("success " + user.toString());
-        return ResponseEntity.ok(userService.createNewUser(user));
+    public ResponseEntity<?> createUser(@RequestBody User user) {
+        // Перевірка, чи існує користувач з таким ім'ям користувача або електронною поштою
+        boolean userExists = userService.existsByUsernameOrEmail(user.getUsername(), user.getEmail());
+        if (userExists) {
+            // Якщо такий користувач вже існує, повернути відповідь з помилкою
+            return ResponseEntity.badRequest().body("User already exists with given username or email");
+        }
+        // Якщо користувача не існує, створити нового
+        User createdUser = userService.createNewUser(user);
+        return ResponseEntity.ok(createdUser);
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {

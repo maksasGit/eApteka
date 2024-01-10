@@ -30,6 +30,12 @@ public class UserService {
     // ##################################
 
 
+    public boolean existsByUsernameOrEmail(String username, String email) {
+        return userRepository.existsByUsernameOrEmail(username, email);
+    }
+
+
+
     public Page<User> getAllUsers(Pageable pageable) {
         return userRepository.findAll(pageable);
     }
