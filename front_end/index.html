@@ -40,17 +40,29 @@
                               </div>
                         </li>
                     </ul>
+        
                     <form class="d-flex" id="card">
-                        <!-- Register Button -->
-                        <a href="registration.html" class="btn btn-outline-dark me-2">Rejestracja</a>
-                        <!-- Login Button -->
-                        <a href="login.html" class="btn btn-outline-dark me-2">Logowanie</a>
+                        <!-- Dropdown for Logged-in User -->
+                        <div class="dropdown me-2" style="display: none;" id="userDropdown">
+                            <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                Username
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" href="orders.html">Moje zamówienia</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="logout()">Wyloguj</a></li>
+                            </ul>
+                        </div>
+                        <!-- Register and Login Buttons -->
+                        <a href="registration.html" class="btn btn-outline-dark me-2" id="registerButton">Rejestracja</a>
+                        <a href="login.html" class="btn btn-outline-dark me-2" id="loginButton">Logowanie</a>
                         <!-- Cart Button -->
                         <button class="btn btn-outline-dark" type="button" onclick="redirectToCart()">
                             <i class="bi-cart-fill me-1"></i>
                             <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                         </button>
                     </form>
+                    
+    
                 </div>
             </div>
         </nav>
@@ -83,4 +95,5 @@
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
     </body>
+    
 </html>
