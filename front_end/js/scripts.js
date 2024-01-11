@@ -16,6 +16,7 @@ function updateCartCount() {
 
 function redirectToCart() {
     window.location.href = "cart.html";
+    updateCartCount();
 }
 
 function setCookie(name, value, days) {
@@ -37,34 +38,6 @@ function getCookie(name) {
         if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
     }
     return null;
-}
-
-function displayCartContents() {
-    const cartItemsContainer = document.querySelector('.card-body');
-    if (cartItemsContainer) {
-        cartItemsContainer.innerHTML = '';
-        cart.forEach(product => {
-            const itemRow = document.createElement('div');
-            itemRow.classList.add('row');
-
-            const imgDiv = document.createElement('div');
-            imgDiv.classList.add('col-lg-3', 'col-md-12', 'mb-4', 'mb-lg-0');
-            const img = document.createElement('img');
-            img.src = product.imageUrl;
-            img.classList.add('w-100');
-            imgDiv.appendChild(img);
-
-            const nameDiv = document.createElement('div');
-            nameDiv.classList.add('col-lg-5', 'col-md-6', 'mb-4', 'mb-lg-0');
-            const productName = document.createElement('p');
-            productName.textContent = product.name;
-            nameDiv.appendChild(productName);
-            itemRow.appendChild(imgDiv);
-            itemRow.appendChild(nameDiv);
-
-            cartItemsContainer.appendChild(itemRow);
-        });
-    }
 }
 
 function updateNavbarForUserStatus() {
@@ -100,10 +73,10 @@ function logout() {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    updateNavbarForUserStatus();
-    updateCartCount();
+     updateNavbarForUserStatus();
+     updateCartCount();
     
-    if (!window.location.pathname.includes("cart.html")) {
+    if (window.location.pathname.includes("index.html")) {
         fetch('https://mocki.io/v1/4dc9188b-4d45-47f9-9725-5d58d559492e')
             .then(response => response.json())
             .then(products => {
@@ -165,10 +138,6 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => console.error('Error fetching data:', error));
     }
 
-
-    if (window.location.pathname.includes("cart.html")) {
-        displayCartContents();
-    }
 
    
     const userStatusElement = document.getElementById('userStatus');
