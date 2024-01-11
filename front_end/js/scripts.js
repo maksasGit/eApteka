@@ -40,6 +40,11 @@ function getCookie(name) {
     return null;
 }
 
+function isInCart(product) {
+    const productName = product.name; // Assuming your product object has an 'id' property
+    return cart.some(item => item.name === productName);
+}
+
 function updateNavbarForUserStatus() {
     const user = getCookie('user');
     const userDropdown = document.getElementById('userDropdown');
@@ -61,7 +66,11 @@ function updateNavbarForUserStatus() {
 
 
 
-
+function deleteFromCart(product){
+    cart.splice(cart.indexOf(product),1);
+    setCookie('cart', JSON.stringify(cart), 7); // Store the cart in a cookie for 7 days
+    updateCartCount();
+}
 
 
 function logout() {
@@ -120,10 +129,16 @@ document.addEventListener('DOMContentLoaded', function () {
                         footerTextCenterDiv.classList.add('text-center');
 
                         const addToCartBtn = document.createElement('button');
-                        addToCartBtn.classList.add('btn', 'btn-outline-dark', 'mt-3');
-                        addToCartBtn.textContent = 'Add to cart';
+                        addToCartBtn.classList.add('btn', 'btn-outline-dark', 'mt-3', 'addToCartBtn');
+                        addToCartBtn.textContent = 'Dodaj do koszyka';
                         addToCartBtn.onclick = function() {
-                            addToCart(product);
+                            if (isInCart(product)) {
+                                deleteFromCart(product);
+                                addToCartBtn.textContent = 'Dodaj do koszyka';
+                            } else {
+                                addToCart(product);
+                                addToCartBtn.textContent = 'Usuń z koszyka';
+                            }
                         };
 
                         footerTextCenterDiv.appendChild(addToCartBtn);
