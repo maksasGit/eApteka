@@ -82,13 +82,15 @@ function logout() {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-     updateNavbarForUserStatus();
-     updateCartCount();
-    
+    updateNavbarForUserStatus();
+    updateCartCount();
+
     if (window.location.pathname.includes("index.html")) {
-        fetch('https://mocki.io/v1/4dc9188b-4d45-47f9-9725-5d58d559492e')
-            .then(response => response.json())
-            .then(products => {
+        fetch('http://localhost:8080/products')
+    .then(response => response.json())
+    .then(data => {
+        if (data && data['content']) {
+            const products = data['content']; // Access the 'content' field for products
                 const productsContainer = document.getElementById('productsContainer');
                 if (productsContainer) {
                     products.forEach(product => {
@@ -100,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         const img = document.createElement('img');
                         img.classList.add('card-img-top');
-                        img.src = product.imageUrl;
+                        img.src = product.imageUrl || 'default-image-url'; // Use a default image URL if product.imageUrl is null
                         img.alt = 'Product Image';
 
                         const cardBodyDiv = document.createElement('div');
@@ -114,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         productName.textContent = product.name;
 
                         const productPrice = document.createElement('p');
-                        productPrice.textContent = `${product.minPrice}zł - ${product.maxPrice}zł`;
+                        productPrice.textContent = `${product.price}zł`; // Access the 'price' field for product price
 
                         textCenterDiv.appendChild(productName);
                         textCenterDiv.appendChild(productPrice);
@@ -148,11 +150,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         productsContainer.appendChild(colDiv);
                     });
+                } else {
+                    console.error('Unexpected data structure:', data);
                 }
+            }
             })
             .catch(error => console.error('Error fetching data:', error));
     }
-
+});
 
    
     const userStatusElement = document.getElementById('userStatus');
@@ -188,7 +193,6 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => console.error('Error:', error));
         });
     }
-});
 
 
 
