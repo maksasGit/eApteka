@@ -19,7 +19,7 @@ function updateTotalPrice() {
 
             if (quantityInput) {
                 const quantity = parseInt(quantityInput.value);
-                const productPrice = parseFloat(product.maxPrice);
+                const productPrice = parseFloat(product.price);
 
                 totalPrice += quantity * productPrice;
             }
@@ -116,7 +116,7 @@ function displayCartContents() {
 
             const priceP = document.createElement('p');
             priceP.classList.add('text-start', 'text-md-center');
-            priceP.innerHTML = '<p>Сena: <strong>' + product.maxPrice + 'zł</strong></p>';
+            priceP.innerHTML = '<p>Сena: <strong>' + product.price + 'zł</strong></p>';
             quantityDiv.appendChild(priceP);
 
             itemRow.appendChild(quantityDiv);
