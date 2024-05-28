@@ -101,4 +101,17 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+public User findByUsernameAndPassword(String username, String password) {
+    // Find the user with the given username and password
+    User user = userRepository.findByUsernameAndPassword(username, password);
+
+    // If no user was found, throw an exception
+    if (user == null) {
+        throw new RuntimeException("User not found with username: " + username);
+    }
+
+    // If a user was found, return it
+    return user;
+}
+
 }
