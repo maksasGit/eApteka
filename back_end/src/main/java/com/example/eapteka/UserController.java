@@ -42,6 +42,19 @@ public class UserController {
         return ResponseEntity.ok(createdUser);
     }
 
+    @PostMapping("/login")
+public ResponseEntity<?> loginUser(@RequestBody User user) {
+    // Check if a user with the provided username and password exists
+    User existingUser = userService.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+    if (existingUser == null) {
+        // If no such user exists, return an error response
+        return ResponseEntity.badRequest().body("Invalid username or password");
+    }
+    // If the user exists, return the user data
+    return ResponseEntity.ok(existingUser);
+}
+
+
 
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
