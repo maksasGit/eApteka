@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +24,9 @@ public class ProductService {
 
     public Product createProduct(Product product) {
         return productRepository.save(product);
+    }
+    public List<Product> createProducts(List<Product> products) {
+        return productRepository.saveAll(products);
     }
 
     // ##################################
@@ -147,4 +151,6 @@ public class ProductService {
             throw new RuntimeException("Product not found with name: " + name);
         }
     }
+
+
 }
