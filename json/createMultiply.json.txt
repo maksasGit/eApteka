@@ -1,0 +1,135 @@
+[
+  {
+    "name": "Pharmaceris S",
+    "price": 48.99,
+    "description": "krem, naczynka, ochrona przeciwsłoneczna, ochrona przed IR, PPD 30, przebarwienia, trądzik, zaczerwienienie, nadwrażliwość, trądzik różowaty, po zabiegach kosmetycznych",
+    "imageUrl": "https://azcdn.doz.pl/image/d/product/361f22e2-scale-350x350.webp",
+    "amount": 144
+  },
+  {
+    "name": "Ibuprom Max Sprint",
+    "price": 26.19,
+    "description": "ból głowy, ból zębów, ból mięśni, ból kości, ból stawów, bolesne miesiączkowanie, ibuprofen, kapsułki, gorączka, grypa, przeziębienie, stan zapalny, migrena",
+    "imageUrl": "https://azcdn.doz.pl/image/d/product/ee0efaf7-scale-350x350.webp",
+    "amount": 150
+  },
+  {
+    "name": "DOZ Zielnik Travium",
+    "price": 15.99,
+    "description": "No Info",
+    "imageUrl": "https://azcdn.doz.pl/image/d/product/4ee35779-scale-350x350.webp",
+    "amount": 3
+  },
+  {
+    "name": "Witamin",
+    "price": 19.99,
+    "description": "tabletka, niedobór minerałów, niedobór witamin, zmęczenie",
+    "imageUrl": "https://azcdn.doz.pl/image/d/product/1bbdf4fd-scale-350x350.webp",
+    "amount": 187
+  },
+  {
+    "name": "Durex Fun Explosion",
+    "price": 74.39,
+    "description": "wyrób medyczny, antykoncepcja",
+    "imageUrl": "https://azcdn.doz.pl/image/d/product/fb23ca34-scale-350x350.webp",
+    "amount": 400
+  },
+  {
+    "name": "Boss Of Toys",
+    "price": 119.99,
+    "description": "BIG toys",
+    "imageUrl": "https://azcdn.doz.pl/image/d/product/028d3326-scale-350x350.webp",
+    "amount": 4
+  },
+  {
+    "name": "Seni Active Classic",
+    "price": 72.90,
+    "description": "nietrzymanie moczu",
+    "imageUrl": "https://azcdn.doz.pl/image/d/product/d5d109d9-scale-350x350.webp",
+    "amount": 3
+  },
+  {
+    "name": "Cerkoderm 15",
+    "price": 15.19,
+    "description": "krem, łuszczyca, rogowacenie, suchość, cukrzyca, dla diabetyków, dla alergików, bez konserwantów, bez parabenów",
+    "imageUrl": "https://azcdn.doz.pl/image/d/product/36b7a74c-scale-350x350.webp",
+    "amount": 100
+  },
+  {
+    "name": "Tena Lady Slim",
+    "price": 33.20,
+    "description": "fosfolipidy, kapsułki",
+    "imageUrl": "https://azcdn.doz.pl/image/d/product/c7c4fbbf-scale-350x350.webp",
+    "amount": 75
+  },
+  {
+    "name": "CeraVe",
+    "price": 58.59,
+    "description": "krem, suchość, ochrona przeciwsłoneczna, dla alergików",
+    "imageUrl": "https://azcdn.doz.pl/image/d/product/e99b7974-scale-350x350.webp",
+    "amount": 98
+  },
+  {
+    "name": "Maximus",
+    "price": 26.59,
+    "description": "wyrób medyczny, żel, suchość",
+    "imageUrl": "https://azcdn.doz.pl/image/d/product/0caf07c3-scale-350x350.webp",
+    "amount": 76
+  },
+  {
+    "name": "Nurofen Express Forte",
+    "price": 135.20,
+    "description": "ibuprofen, kapsułki, ból, gorączka",
+    "imageUrl": "https://azcdn.doz.pl/image/d/product/0b4a17f5-scale-350x350.webp",
+    "amount": 53
+  },
+  {
+    "name": "Olimp Forsen Forte z melatoniną",
+    "price": 31.19,
+    "description": "kapsułki, sen, złe samopoczucie, zmęczenie",
+    "imageUrl": "https://azcdn.doz.pl/image/d/product/44bf5fb7-scale-350x350.webp",
+    "amount": 23
+  },
+  {
+    "name": "Alkodtox",
+    "price": 10.99,
+    "description": "fosfolipidy, kapsułki",
+    "imageUrl": "https://azcdn.doz.pl/image/d/product/53469edd-scale-350x350.webp",
+    "amount": 111
+  },
+  {
+    "name": "Viagra Connect Max",
+    "price": 68.29,
+    "description": "sildenafil, tabletka, erekcja",
+    "imageUrl": "https://azcdn.doz.pl/image/d/product/e0865676-scale-350x350.webp",
+    "amount": 123
+  },
+  {
+    "name": "Allertec WZF",
+    "price": 15.99,
+    "description": "fosfolipidy, kapsułki",
+    "imageUrl": "https://azcdn.doz.pl/image/d/product/aeaf95fa-scale-350x350.webp",
+    "amount": 432
+  },
+  {
+    "name": "Aifory CBD",
+    "price": 73.79,
+    "description": "olej, CBD, konopia",
+    "imageUrl": "https://azcdn.doz.pl/image/d/product/160ead93-scale-350x350.webp",
+    "amount": 22
+  },
+  {
+    "name": "Nicorette Freshmint",
+    "price": 68.59,
+    "description": "fosfolipidy, kapsułki",
+    "imageUrl": "https://azcdn.doz.pl/image/d/product/d5746b3c-scale-350x350.webp",
+    "amount": 55
+  },
+  {
+    "name": "Gym Beer",
+    "price": 4.79,
+    "description": "fosfolipidy, kapsułki",
+    "imageUrl": "https://azcdn.doz.pl/image/d/product/0e81cc36-scale-350x350.webp",
+    "amount": 90
+  }
+]
