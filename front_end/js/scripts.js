@@ -1,5 +1,25 @@
 let cart = JSON.parse(getCookie('cart')) || [];
 
+function searchFunction() {
+    let input = document.getElementById('search');
+    let filter = input.value.toUpperCase();
+    let productsContainer = document.getElementById('productsContainer');
+    let products = productsContainer.getElementsByClassName('col');
+
+    for (let i = 0; i < products.length; i++) {
+        let title = products[i].getElementsByTagName("h5")[0];
+        if (title) {
+            let textValue = title.textContent || title.innerText;
+            if (textValue.toUpperCase().indexOf(filter) > -1) {
+                products[i].style.display = "";
+            } else {
+                products[i].style.display = "none";
+            }
+        }
+    }
+}
+
+
 function addToCart(product) {
     cart.push(product);
     setCookie('cart', JSON.stringify(cart), 7); // Store the cart in a cookie for 7 days
@@ -132,7 +152,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         const addToCartBtn = document.createElement('button');
                         addToCartBtn.classList.add('btn', 'btn-outline-dark', 'mt-3', 'addToCartBtn');
-                        addToCartBtn.textContent = 'Dodaj do koszyka';
+                        if (!isInCart(product)) {
+                            addToCartBtn.textContent = 'Dodaj do koszyka';
+                        } else {
+                            addToCartBtn.textContent = 'Usuń z koszyka';
+                        }
                         addToCartBtn.onclick = function() {
                             if (isInCart(product)) {
                                 deleteFromCart(product);
